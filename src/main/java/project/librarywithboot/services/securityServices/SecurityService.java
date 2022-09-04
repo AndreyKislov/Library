@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.librarywithboot.models.SecurityPerson;
 import project.librarywithboot.repositories.SecurityRepositories;
-import security.SecurityPersonDetails;
+import project.librarywithboot.security.SecurityPersonDetails;
 
 import java.util.Optional;
 

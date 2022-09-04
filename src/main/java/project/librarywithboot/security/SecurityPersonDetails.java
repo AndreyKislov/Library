@@ -1,5 +1,6 @@
-package security;
+package project.librarywithboot.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import project.librarywithboot.models.SecurityPerson;
@@ -10,6 +11,7 @@ public class SecurityPersonDetails implements UserDetails {
 
     private final SecurityPerson person;
 
+    @Autowired
     public SecurityPersonDetails(SecurityPerson person) {
         this.person = person;
     }
@@ -50,7 +52,7 @@ public class SecurityPersonDetails implements UserDetails {
         return true;
     }
 
-    public SecurityPerson getPerson(){
+    public SecurityPerson getPerson() {
         return person;
     }
 }
