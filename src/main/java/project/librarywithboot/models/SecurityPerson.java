@@ -24,5 +24,5 @@ public class SecurityPerson {
     private String username;
 
     @Column(name = "password")
-    private int password;
+    private String password;
 }
