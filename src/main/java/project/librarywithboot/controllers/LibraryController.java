@@ -1,12 +1,15 @@
 package project.librarywithboot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.librarywithboot.models.Book;
 import project.librarywithboot.models.Reader;
+import project.librarywithboot.security.SecurityPersonDetails;
 import project.librarywithboot.services.BookService;
 import project.librarywithboot.services.ReaderService;
 import project.librarywithboot.util.date.ByDate;
@@ -34,9 +37,11 @@ public class LibraryController {
         this.byDate = byDate;
     }
 
-    @GetMapping
-    public String mainTheme() {
-
+    @GetMapping("/main")
+    public String mainTheme(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      SecurityPersonDetails personDetails = (SecurityPersonDetails) authentication.getPrincipal();
+        model.addAttribute("person", personDetails.getPerson());
         return "main/main";
     }
 

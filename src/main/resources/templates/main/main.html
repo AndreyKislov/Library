@@ -11,6 +11,10 @@
     <p th:text="БИБЛИОТЕКА"></p>
 </h1>
 
+<h2>
+    <p th:text="${'Приветствуем, ' + person.getName()}" >Text</p>
+</h2>
+
 <form th:method="GET" th:action="@{readers}">
     <input type="submit" value="Читатели">
 </form>

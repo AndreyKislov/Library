@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org
+https://thymeleaf.org ">
+<head>
+    <title>Login</title>
+<body>
+
+<form name="F" method="post" action="/process_login">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <input type="submit" value="Login">
+
+    <div style="color: red" th:if="${param.error}">
+        Не правильные имя и пароль.
+    </div>
+</form>
+
+<form th:method="GET" th:action="@{/auth/registration}">
+<input type="submit" value="Registration">
+</form>
+
+
+
+</body>
+</html>

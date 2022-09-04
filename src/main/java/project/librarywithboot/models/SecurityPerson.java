@@ -3,19 +3,24 @@ package project.librarywithboot.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
+
+
+@Entity
+@Table(name = "securityperson", schema = "public")
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "SecurityPerson", schema = "public")
+@Component
 public class SecurityPerson {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int Id;
 
     @Column(name = "name")
     private String name;
