@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Все книги</title>
+</head>
+<body>
+
+<form th:method="GET" th:action="@{/books/search}" th:object="${book}">
+    <label for="bookName">Название книги: </label>
+    <input type="text" th:field="*{bookName}" id="bookName"/>
+    <br>
+    <input type="submit" value="Поиск">
+</form>
+
+<p th:each="book : ${books}">
+    <a th:href="@{/books/{id}(id = ${book.getId()})}"
+       th:text="${book.getBookName() + ', ' + book.getAuthor()}"> Book</a>
+</p>
+<br>
+<form th:method="GET" th:action="@{books/new}">
+    <input type="submit" value="Новая книга">
+</form>
+
+<form th:method="GET" th:action="@{readers}">
+    <input type="submit" value="Читатели">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Книга</title>
+</head>
+<body>
+
+
+<p th:text="'Автор: ' + ${book.getBookName()}">Value</p>
+<p th:text="'Книга: ' + ${book.getAuthor()} ">Value</p>
+<p th:text="'Год написания: ' + ${book.getYearOfWriting()}">Value</p>
+<p th:text="'Время создания записи: ' + ${book.getDateOfCreate()}">Value</p>
+
+
+<tg th:switch="${integer}">
+    <h3>
+        <div style="color: green" th:case="'0'">
+            <p th:text="'Книга свободна'"></p>
+
+            <form th:method="POST" th:action="@{/books/{id}/select(id = ${book.getId()})}">
+                <label for="reader"></label>
+                <select th:object="${reader}" th:field="*{id}" id="reader">
+                    <option th:each="reader : ${readers}" th:value="${reader.getId()}"
+                            th:text="${reader.getName()}"></option>
+                </select>
+                <input type="submit" value="Назначить читателя"/>
+            </form>
+
+        </div>
+    </h3>
+
+
+    <div th:case="*">
+        <h3>
+            <a th:text="'Должник: '"></a>
+            <a th:href="@{/readers/{id}(id = ${owner.getId()})}"
+               style="color: red" th:text="${owner.getName}"></a>
+        </h3>
+        <p style="color: red" th:text="'Время возврата просрочено на: ' + ${book.getOverdue} + ' дней'"
+           th:if="${integer2}=='1'"></p>
+
+        <form th:method="PATCH" th:action="@{/books/{Id}/clear(Id = ${book.getId()})}">
+            <input type="submit" value="Освободить книгу">
+        </form>
+
+    </div>
+
+</tg>
+
+
+<form th:method="DELETE" th:action="@{/books/{id}(id = ${book.getId()})}">
+    <input type="submit" value="Удалить">
+</form>
+
+<form th:method="GET" th:action="@{/books/{id}/edit(id = ${book.getId()})}">
+    <input type="submit" value="Обновить">
+</form>
+
+<form th:method="GET" th:action="@{/books}">
+    <input type="submit" value="Все книги">
+</form>
+
+</body>
+</html>

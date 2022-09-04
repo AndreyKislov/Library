@@ -1,0 +1,9 @@
+spring.datasource.driver-class-name=
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+spring.jpa.database-platform=
+spring.jpa.properties.hibernate.show_sql=
+spring.jpa.open-in-view=
+spring.mvc.hiddenmethod.filter.enabled=
