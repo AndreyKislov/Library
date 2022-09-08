@@ -1,6 +1,7 @@
 package project.librarywithboot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import project.librarywithboot.services.ReaderService;
 import project.librarywithboot.util.date.ByDate;
 import project.librarywithboot.validator.ValidForBook;
 import project.librarywithboot.validator.ValidForReader;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class LibraryController {
     @GetMapping("/main")
     public String mainTheme(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      SecurityPersonDetails personDetails = (SecurityPersonDetails) authentication.getPrincipal();
+        SecurityPersonDetails personDetails = (SecurityPersonDetails) authentication.getPrincipal();
         model.addAttribute("person", personDetails.getPerson());
         return "main/main";
     }

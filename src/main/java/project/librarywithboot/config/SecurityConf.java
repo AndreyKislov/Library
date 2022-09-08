@@ -1,24 +1,26 @@
 package project.librarywithboot.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConf {
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
+        http.authorizeRequests()
+                .antMatchers("books/new", "/books/{id}/edit", "/admin", "/admin/edit", "/admin/setRole" ).hasRole("ADMIN")
                 .antMatchers("/auth/login", "/auth/registration", "error").permitAll()
                 .anyRequest()
-                .authenticated()
+                .hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
                 .loginPage("/auth/login")
@@ -34,6 +36,7 @@ public class SecurityConf {
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+
+        return new BCryptPasswordEncoder();
     }
 }

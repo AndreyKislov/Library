@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.librarywithboot.config.SecurityConf;
 import project.librarywithboot.models.SecurityPerson;
 import project.librarywithboot.repositories.SecurityRepositories;
 import project.librarywithboot.security.SecurityPersonDetails;

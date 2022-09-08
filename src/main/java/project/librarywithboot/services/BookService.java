@@ -1,6 +1,7 @@
 package project.librarywithboot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.librarywithboot.models.Book;
@@ -37,18 +38,21 @@ public class BookService {
     }
 
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void save(Book book) {
         book.setDateOfCreate(new Date());
         bookRepository.save(book);
     }
 
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void update(int id, Book updateBook) {
         updateBook.setId(id);
         save(updateBook);
     }
 
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(int id) {
         bookRepository.deleteById(id);
     }

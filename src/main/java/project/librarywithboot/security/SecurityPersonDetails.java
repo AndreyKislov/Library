@@ -1,9 +1,11 @@
 package project.librarywithboot.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import project.librarywithboot.models.SecurityPerson;
 import java.util.Collection;
+import java.util.Collections;
 
 
 public class SecurityPersonDetails implements UserDetails {
@@ -16,7 +18,7 @@ public class SecurityPersonDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
     }
 
     @Override
